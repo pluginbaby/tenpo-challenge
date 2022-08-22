@@ -3,6 +3,7 @@ package com.challenge.tenpo.entities;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -16,5 +17,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    @Column(name = "created_at")
+    private LocalDateTime creationDate;
 
 }

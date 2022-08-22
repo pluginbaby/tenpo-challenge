@@ -1,7 +1,6 @@
 package com.challenge.tenpo.exceptions.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;

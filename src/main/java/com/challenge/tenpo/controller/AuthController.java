@@ -1,11 +1,14 @@
 package com.challenge.tenpo.controller;
 
+import com.challenge.tenpo.dto.AuthResponseDTO;
 import com.challenge.tenpo.dto.LoginDTO;
 import com.challenge.tenpo.dto.RegisterDTO;
+import com.challenge.tenpo.entities.User;
 import com.challenge.tenpo.service.UserService;
+import com.challenge.tenpo.utils.JWTUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,21 +30,27 @@ public class AuthController {
 
     private AuthenticationManager authenticationManager;
     private UserService userService;
+    private JWTUtils jwtUtils;
 
 
     @PostMapping("/signin")
-    public ResponseEntity<String> authenticateUser(@Valid @RequestBody LoginDTO loginDto){
+    public ResponseEntity<AuthResponseDTO> authenticateUser(@Valid @RequestBody LoginDTO loginDto){
+
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsernameOrEmail(), loginDto.getPassword()));
 
+        
+        String token = jwtUtils.generateJWT(authentication);
+
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("Signin has been done succesfully !", HttpStatus.OK);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, token).body(new AuthResponseDTO("Signin has been done succesfully !"));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterDTO registerDTO){
+    public ResponseEntity<AuthResponseDTO> registerUser(@Valid @RequestBody RegisterDTO registerDTO){
         this.userService.registerUser(registerDTO);
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity(new AuthResponseDTO("User registered successfully"), HttpStatus.OK);
 
     }
 

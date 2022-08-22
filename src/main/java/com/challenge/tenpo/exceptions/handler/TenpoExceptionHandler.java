@@ -32,7 +32,7 @@ public class TenpoExceptionHandler {
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<ErrorResponseDTO> handleGeneralExceptions(Exception ex) {
         log.error("Something went wrong. StackTrace for details", ex);
-        return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ErrorResponseDTO(INTERNAL_SERVER_ERROR.value(), INTERNAL_SERVER_ERROR.getReasonPhrase()));
+        return ResponseEntity.status(INTERNAL_SERVER_ERROR).body(new ErrorResponseDTO(INTERNAL_SERVER_ERROR.value(), ex.getMessage()));
     }
 
     /**
@@ -41,7 +41,7 @@ public class TenpoExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResponseEntity<ErrorResponseDTO> handleMissingParameter(MissingServletRequestParameterException exception) {
         log.error(exception.getMessage(), exception);
-        return ResponseEntity.status(BAD_REQUEST).body(new ErrorResponseDTO(BAD_REQUEST.value(), BAD_REQUEST.getReasonPhrase()));
+        return ResponseEntity.status(BAD_REQUEST).body(new ErrorResponseDTO(BAD_REQUEST.value(), exception.getMessage()));
     }
 
     /**
