@@ -18,6 +18,7 @@ public class SumService {
     }
 
     private SumResponseDTO doSum(Double number1, Double number2, Double percentage) {
+        percentage = percentage/100 + 1;
         return new SumResponseDTO((number1 + number2) * percentage);
     }
 

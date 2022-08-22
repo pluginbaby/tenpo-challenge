@@ -65,7 +65,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/api/auth/**");
+        return (web) -> web.ignoring().antMatchers("/mock/**").antMatchers("/api/auth/**");
     }
 
     // Used by JwtAuthenticationProvider to generate JWT tokens

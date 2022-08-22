@@ -1,12 +1,13 @@
 package com.challenge.tenpo.client;
 
 import com.challenge.tenpo.dto.PercentageDTO;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.util.retry.Retry;
 
 import java.time.Duration;
@@ -33,10 +34,18 @@ public class PercentageClient {
                 .uri(basePath + percentagePath)
                 .retrieve()
                 .bodyToFlux(PercentageDTO.class)
-                .retryWhen(Retry.backoff(maxRetry, Duration.ofMillis(durationRequest))
-                        .filter(throwable -> throwable instanceof WebClientRequestException)
-                        .onRetryExhaustedThrow((retryBackoffSpec, retrySignal) -> retrySignal.failure()))
+                .retryWhen(Retry.backoff(maxRetry, Duration.ofSeconds(durationRequest))
+                        .filter(this::is5xxServerError)
+                        .onRetryExhaustedThrow((retryBackoffSpec, retrySignal) -> new WebClientException(
+                                "Percentage Service failed, after max retries of: "
+                                        + retrySignal.totalRetries()) {
+                        }))
                 .blockFirst();
+    }
+
+    private boolean is5xxServerError(Throwable throwable) {
+        return throwable instanceof WebClientResponseException &&
+                ((WebClientResponseException) throwable).getStatusCode().is5xxServerError();
     }
 
 }
