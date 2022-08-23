@@ -1,7 +1,7 @@
 package com.challenge.tenpo.security;
 
-import com.challenge.tenpo.entities.User;
-import com.challenge.tenpo.service.UserService;
+import com.challenge.tenpo.rest.entities.User;
+import com.challenge.tenpo.rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
