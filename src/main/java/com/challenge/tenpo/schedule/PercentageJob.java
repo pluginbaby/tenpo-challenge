@@ -2,7 +2,7 @@ package com.challenge.tenpo.schedule;
 
 import com.challenge.tenpo.rest.client.PercentageClient;
 import com.challenge.tenpo.rest.dto.PercentageDTO;
-import com.challenge.tenpo.repository.ISumRepository;
+import com.challenge.tenpo.rest.repository.ISumRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;

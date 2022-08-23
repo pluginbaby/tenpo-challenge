@@ -1,6 +1,7 @@
 package com.challenge.tenpo.rest.service;
 
-import com.challenge.tenpo.repository.ISumRepository;
+import com.challenge.tenpo.rest.dto.SumResponseDTO;
+import com.challenge.tenpo.rest.repository.ISumRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

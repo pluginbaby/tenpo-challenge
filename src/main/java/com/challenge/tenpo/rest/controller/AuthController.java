@@ -1,5 +1,9 @@
 package com.challenge.tenpo.rest.controller;
 
+import com.challenge.tenpo.rest.dto.AuthResponseDTO;
+import com.challenge.tenpo.rest.dto.LoginDTO;
+import com.challenge.tenpo.rest.dto.RegisterDTO;
+import com.challenge.tenpo.rest.service.UserService;
 import com.challenge.tenpo.utils.JWTUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +37,7 @@ public class AuthController {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+
 
         
         String token = jwtUtils.generateJWT(authentication);

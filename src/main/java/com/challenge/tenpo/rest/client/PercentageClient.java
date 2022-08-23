@@ -1,5 +1,7 @@
 package com.challenge.tenpo.rest.client;
 
+import com.challenge.tenpo.rest.dto.PercentageDTO;
+import com.challenge.tenpo.rest.exceptions.ExceedMaxAttemptsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

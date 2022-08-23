@@ -1,6 +1,8 @@
 package com.challenge.tenpo.rest.controller;
 
+import com.challenge.tenpo.rest.dto.FilterDTO;
 import com.challenge.tenpo.rest.exceptions.dto.PageDTO;
+import com.challenge.tenpo.rest.service.HistoryEndpointService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.challenge.tenpo.repository;
+package com.challenge.tenpo.rest.repository;
 
 import com.challenge.tenpo.rest.entities.HistoryEndpoint;
 import org.springframework.data.jpa.repository.JpaRepository;

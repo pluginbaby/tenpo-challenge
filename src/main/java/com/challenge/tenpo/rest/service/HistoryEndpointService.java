@@ -1,7 +1,11 @@
 package com.challenge.tenpo.rest.service;
 
+import com.challenge.tenpo.rest.dto.FilterDTO;
+import com.challenge.tenpo.rest.dto.HistoryInformationDTO;
+import com.challenge.tenpo.rest.entities.HistoryEndpoint;
 import com.challenge.tenpo.rest.exceptions.dto.PageDTO;
-import com.challenge.tenpo.repository.IHistoryEndpointsRepository;
+import com.challenge.tenpo.rest.mapper.HistoryEndpointsMapper;
+import com.challenge.tenpo.rest.repository.IHistoryEndpointsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Async;

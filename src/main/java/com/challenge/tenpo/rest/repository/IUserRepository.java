@@ -1,4 +1,4 @@
-package com.challenge.tenpo.repository;
+package com.challenge.tenpo.rest.repository;
 
 import com.challenge.tenpo.rest.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

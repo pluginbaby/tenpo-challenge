@@ -1,8 +1,14 @@
 package com.challenge.tenpo.rest.service;
 
-import com.challenge.tenpo.repository.IUserRepository;
+import com.challenge.tenpo.rest.dto.RegisterDTO;
+import com.challenge.tenpo.rest.entities.User;
+import com.challenge.tenpo.rest.exceptions.EntityAlreadyExistException;
+import com.challenge.tenpo.rest.mapper.UserMapper;
+import com.challenge.tenpo.rest.repository.IUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 
 @Service

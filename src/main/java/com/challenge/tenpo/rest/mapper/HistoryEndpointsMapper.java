@@ -1,5 +1,7 @@
 package com.challenge.tenpo.rest.mapper;
 
+import com.challenge.tenpo.rest.dto.HistoryInformationDTO;
+import com.challenge.tenpo.rest.entities.HistoryEndpoint;
 import com.challenge.tenpo.rest.exceptions.dto.HistoryEndpointDTO;
 import org.springframework.stereotype.Component;
 

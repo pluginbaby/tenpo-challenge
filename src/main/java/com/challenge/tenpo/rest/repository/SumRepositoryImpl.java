@@ -1,4 +1,4 @@
-package com.challenge.tenpo.repository;
+package com.challenge.tenpo.rest.repository;
 
 import org.springframework.stereotype.Repository;
 
