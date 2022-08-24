@@ -28,7 +28,7 @@ public class HistoryEndpointService {
     public PageDTO getHistoryEndpointsWithPagination(FilterDTO filterDTO) {
         return pageMapper.toDTO(
                 historyEndpointsRepository.findAll(PageRequest.of(filterDTO.getPage(), filterDTO.getSize()))
-                        .map(historyEndpoint -> historyEndpointsMapper.toDTO(historyEndpoint)) );
+                        .map(historyEndpoint -> historyEndpointsMapper.toDTO(historyEndpoint)));
     }
 
 

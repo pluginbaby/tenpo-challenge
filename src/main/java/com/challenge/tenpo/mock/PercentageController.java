@@ -1,6 +1,8 @@
 package com.challenge.tenpo.mock;
 
 import com.challenge.tenpo.rest.dto.PercentageDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +20,21 @@ public class PercentageController {
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-
+    @Operation(
+            method = "Get",
+            summary = "Mocked endpoint that return a random percentage ",
+            description = "This is a mocked endpoint that returns a random percentage",
+            responses = {
+                    @ApiResponse(responseCode = "200"),
+            }
+    )
     @GetMapping
     public PercentageDTO getPercentage () {
         //Generate random within 0 and 100
         Double randomDouble = ThreadLocalRandom.current().nextDouble(0, 100);
         //Rounding to two decimals
         randomDouble = Math.floor(randomDouble * 100) / 100;
-        throw new RuntimeException("run time");
-        //return new PercentageDTO(randomDouble);
+        return new PercentageDTO(randomDouble);
 
     }
 

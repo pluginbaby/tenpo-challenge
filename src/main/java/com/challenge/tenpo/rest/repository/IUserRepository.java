@@ -15,6 +15,6 @@ public interface IUserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmailOrUsername(String usernameOrEmail);
 
     //Check during the registration if an user already exists
-    Optional<User> findByUsernameOrEmail (String username, String email);
+    Optional<User> findByUsernameOrEmail(String username, String email);
 
 }

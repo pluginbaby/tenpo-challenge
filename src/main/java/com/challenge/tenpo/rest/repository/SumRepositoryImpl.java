@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public class SumRepositoryImpl implements ISumRepository{
+public class SumRepositoryImpl implements ISumRepository {
 
     private Double percentage = null;
 

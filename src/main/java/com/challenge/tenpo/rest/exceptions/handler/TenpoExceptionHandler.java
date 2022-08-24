@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -40,6 +41,13 @@ public class TenpoExceptionHandler {
         log.error("Entity already exists", ex);
         return ResponseEntity.status(CONFLICT).body(new ErrorResponseDTO(CONFLICT.value(), ex.getMessage()));
     }
+
+    @ExceptionHandler(value = {BadCredentialsException.class})
+    public ResponseEntity<ErrorResponseDTO> handleGeneralExceptions(BadCredentialsException ex) {
+        log.error("Entity already exists", ex);
+        return ResponseEntity.status(BAD_REQUEST).body(new ErrorResponseDTO(BAD_REQUEST.value(), ex.getMessage()));
+    }
+
 
     /**
      * Handle 400 Missing Parameter failures here

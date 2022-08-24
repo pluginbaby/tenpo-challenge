@@ -41,11 +41,6 @@ public class SecurityConfig {
     @Value("${jwt.private.key}")
     private RSAPrivateKey rsaPrivateKey;
 
-    @Value("${springdoc.api-docs.path}")
-    private String restApiDocPath;
-    @Value("${springdoc.swagger-ui.path}")
-    private String swaggerPath;
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
@@ -55,7 +50,9 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                .anyRequest().authenticated())
+                        //.antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                        .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .oauth2ResourceServer()
                 .jwt();
@@ -65,7 +62,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/mock/**").antMatchers("/api/auth/**");
+        return (web) -> web.ignoring().antMatchers("/mock/**").antMatchers("/api/auth/**").antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html");
     }
 
     // Used by JwtAuthenticationProvider to generate JWT tokens
