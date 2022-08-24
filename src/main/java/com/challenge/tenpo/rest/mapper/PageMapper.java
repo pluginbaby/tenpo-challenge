@@ -1,13 +1,13 @@
-package com.challenge.tenpo.rest.service;
+package com.challenge.tenpo.rest.mapper;
 
 import com.challenge.tenpo.rest.exceptions.dto.PageDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PageToPageDTOMapper {
+public class PageMapper {
 
-    public PageDTO pageToPageDTO(Page<?> page) {
+    public PageDTO toDTO(Page<?> page) {
         PageDTO pageDTO = new PageDTO();
         pageDTO.setContent(page.getContent());
         pageDTO.setTotalItems(page.getTotalElements());

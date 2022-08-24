@@ -31,12 +31,12 @@ public class HistoryEndpointsFilter extends OncePerRequestFilter {
         ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
         ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
         LocalDateTime time = LocalDateTime.now();
-        filterChain.doFilter(request, responseWrapper);
+        filterChain.doFilter(requestWrapper, responseWrapper);
         byte[] responseArray = responseWrapper.getContentAsByteArray();
         String responseStr = new String(responseArray, responseWrapper.getCharacterEncoding());
         HttpMethod httpMethod = HttpMethod.valueOf(requestWrapper.getMethod());
         HttpStatus responseStatus = HttpStatus.valueOf(responseWrapper.getStatus());
-        historyEndpointService.saveHistory(HistoryInformationDTO.builder().content(responseStr).method(httpMethod).status(responseStatus).executedTime(time).endpointUrl(request.getRequestURI()).build());
+        historyEndpointService.saveHistory(HistoryInformationDTO.builder().content(responseStr).method(httpMethod).status(responseStatus).executedTime(time).endpointUrl(requestWrapper.getRequestURI()).build());
         responseWrapper.copyBodyToResponse();
 
     }

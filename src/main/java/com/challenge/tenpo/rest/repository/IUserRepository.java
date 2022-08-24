@@ -2,6 +2,7 @@ package com.challenge.tenpo.rest.repository;
 
 import com.challenge.tenpo.rest.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -10,9 +11,10 @@ import java.util.Optional;
 public interface IUserRepository extends JpaRepository<User, Long> {
 
     //Used for signin
-    Optional<User> findByEmailOrUsername(String username, String username2);
+    @Query("SELECT u from User u WHERE u.username=?1 OR u.email=?1 ")
+    Optional<User> findByEmailOrUsername(String usernameOrEmail);
 
-    //Check in the registration if a user already exists
+    //Check during the registration if an user already exists
     Optional<User> findByUsernameOrEmail (String username, String email);
 
 }

@@ -2,20 +2,23 @@ package com.challenge.tenpo.rest.client;
 
 import com.challenge.tenpo.rest.dto.PercentageDTO;
 import com.challenge.tenpo.rest.exceptions.ExceedMaxAttemptsException;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
 import java.time.Duration;
 
 @Component
+@RequiredArgsConstructor
 public class PercentageClient {
 
-    @Autowired
-    private WebClient.Builder webClient;
+    private final WebClient.Builder webClient;
 
     @Value("${sum_client_base_url}")
     private String basePath;
@@ -32,14 +35,14 @@ public class PercentageClient {
                 .get()
                 .uri(basePath + percentagePath)
                 .retrieve()
-                .bodyToFlux(PercentageDTO.class)
+                .bodyToMono(PercentageDTO.class)
                 .retryWhen(Retry.backoff(maxRetry, Duration.ofSeconds(durationRequest))
                         .filter(this::is5xxServerError)
                         .onRetryExhaustedThrow((retryBackoffSpec, retrySignal) -> new ExceedMaxAttemptsException(
                                 "Percentage Service failed, after max retries of: "
                                         + retrySignal.totalRetries()) {
                         }))
-                .blockFirst();
+                .block();
     }
 
     private boolean is5xxServerError(Throwable throwable) {

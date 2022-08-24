@@ -5,6 +5,7 @@ import com.challenge.tenpo.rest.dto.HistoryInformationDTO;
 import com.challenge.tenpo.rest.entities.HistoryEndpoint;
 import com.challenge.tenpo.rest.exceptions.dto.PageDTO;
 import com.challenge.tenpo.rest.mapper.HistoryEndpointsMapper;
+import com.challenge.tenpo.rest.mapper.PageMapper;
 import com.challenge.tenpo.rest.repository.IHistoryEndpointsRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -17,7 +18,7 @@ public class HistoryEndpointService {
 
     private IHistoryEndpointsRepository historyEndpointsRepository;
     private HistoryEndpointsMapper historyEndpointsMapper;
-    private PageToPageDTOMapper pageToPageDTOMapper;
+    private PageMapper pageMapper;
 
     @Async
     public HistoryEndpoint saveHistory(HistoryInformationDTO dto) {
@@ -25,10 +26,9 @@ public class HistoryEndpointService {
     }
 
     public PageDTO getHistoryEndpointsWithPagination(FilterDTO filterDTO) {
-        return pageToPageDTOMapper.pageToPageDTO(
+        return pageMapper.toDTO(
                 historyEndpointsRepository.findAll(PageRequest.of(filterDTO.getPage(), filterDTO.getSize()))
-                        .map(historyEndpoint -> historyEndpointsMapper.toDTO(historyEndpoint))
-        );
+                        .map(historyEndpoint -> historyEndpointsMapper.toDTO(historyEndpoint)) );
     }
 
 

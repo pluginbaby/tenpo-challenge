@@ -27,13 +27,13 @@ public class UserService {
 
 
     public Optional<User> findByUsernameOrEmail(String usernameOrEmail) {
-        return userRepository.findByEmailOrUsername(usernameOrEmail, usernameOrEmail);
+        return userRepository.findByEmailOrUsername(usernameOrEmail);
     }
 
     private void checkIfExists(RegisterDTO registerDTO) {
         Optional<User> userOptional = userRepository.findByUsernameOrEmail(registerDTO.getUsername(), registerDTO.getEmail());
         if (userOptional.isPresent()) {
-            throw new EntityAlreadyExistException("User already exists with that username or email");
+            throw new EntityAlreadyExistException(String.format("User already exists with username: %s or email: %s", registerDTO.getUsername(), registerDTO.getEmail()));
         }
     }
 
