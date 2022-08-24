@@ -44,7 +44,7 @@ public class HistoryEndpointFilterTest {
 
 
     @Test
-    public void testFilter () throws ServletException, IOException {
+    public void testFilterSuccess () throws ServletException, IOException {
         Mockito.when(response.getCharacterEncoding()).thenReturn("UTF-8");
         Mockito.when(request.getMethod()).thenReturn(HttpMethod.POST.name());
         Mockito.when(response.getStatus()).thenReturn(201);

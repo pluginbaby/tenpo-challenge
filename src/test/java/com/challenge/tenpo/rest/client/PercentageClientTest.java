@@ -37,7 +37,7 @@ public class PercentageClientTest {
     }
 
     @Test
-    public void getPercentageSuccess () throws JsonProcessingException {
+    public void getPercentageSuccess() throws JsonProcessingException {
         Double value = Double.valueOf("10");
         PercentageDTO mockResponse = new PercentageDTO(value);
         mockWebServer.setDispatcher(new QueueDispatcher());
@@ -52,15 +52,16 @@ public class PercentageClientTest {
     }
 
     @Test
-    public void getPercentageFailed () throws JsonProcessingException {
+    public void getPercentageFailedAfter3Attempts() {
         Double value = Double.valueOf("10");
-        PercentageDTO mockResponse = new PercentageDTO(value);
         mockWebServer.setDispatcher(new QueueDispatcher());
-        mockWebServer.enqueue(
-                new MockResponse()
-                        .setResponseCode(500)
-                        .addHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
-        );
+        for (int i = 0; i < 4; i++) {
+            mockWebServer.enqueue(
+                    new MockResponse()
+                            .setResponseCode(500)
+                            .addHeader("Content-Type", MediaType.APPLICATION_JSON_VALUE)
+            );
+        }
         Exception exception = assertThrows(Exception.class, () -> {
             percentageClient.getPercentage();
         });

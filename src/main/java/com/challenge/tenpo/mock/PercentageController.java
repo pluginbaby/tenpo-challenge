@@ -25,7 +25,8 @@ public class PercentageController {
         Double randomDouble = ThreadLocalRandom.current().nextDouble(0, 100);
         //Rounding to two decimals
         randomDouble = Math.floor(randomDouble * 100) / 100;
-        return new PercentageDTO(randomDouble);
+        throw new RuntimeException("run time");
+        //return new PercentageDTO(randomDouble);
 
     }
 

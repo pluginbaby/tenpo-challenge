@@ -36,7 +36,7 @@ public class SumServiceTest {
     }
 
     @Test
-    public void calculateSumNotPercentage() {
+    public void calculateSumNotPercentagePresent() {
         when(sumRepository.getPercentage()).thenReturn(Optional.empty());
 
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
