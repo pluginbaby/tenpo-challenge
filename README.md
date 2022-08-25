@@ -1,4 +1,4 @@
-# Challenge de Tenpo
+# Challenge de Tenpo (por Alex rojas)
 
 ## Consideraciones:
 1. Unit tests agregados en las clases más relevantes
@@ -9,5 +9,13 @@ Se realizó de esta manera para que se pueda probar el endpoint cuando todavía 
 5. Los endpoints se pueden probar o bien desde POSTMAN (importando la coleccion con nombre de archivo tenpo-challenge.postman_collection.json ubicada en la raiz del proyecto) o bien desde swagger.   
 Tener en cuenta que los endpoints /api/sum y /api/histories requieren estar autenticados, por lo que esperan recibir un token de autenticacion. Este token es devuelto cuando se realiza el login del usuario (/signin) y es devuelto en el header de la respuesta. 
 Lo que se debe hacer es tomar este token y agregarlo como header en el request, una vez hecho esto, los servicios /api/sum y /api/histories deberian responder satisfactoriamente.
+6. El historial de endpoints guarda resultados sólo para las llamadas a /api/sum, /api/histories api/auth/signin y api/auth/signup.
 
-## Guia de usuario
+## Prerequisitos
+1. Tener Docker instalar
+2. Tener Postman instalado
+
+## Guia de Usuario
+1. Clonar el proyecto
+2. Ir hacia el directorio del proyecto clonado y ejecutar la siguiente instruccion: 'docker-compose up'
+3. Realizar requests a la aplicacion desde POSTMAN o desde Swagger. 

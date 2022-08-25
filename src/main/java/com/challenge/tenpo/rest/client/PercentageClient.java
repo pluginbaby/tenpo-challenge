@@ -22,7 +22,7 @@ public class PercentageClient {
 
     @Value("${sum.client.base.url}")
     private String basePath;
-    @Value("${sum.client.sum.path}")
+    @Value("${sum.client.percentage.path}")
     private String percentagePath;
     @Value("${sum.client.max.retry}")
     private Integer maxRetry;

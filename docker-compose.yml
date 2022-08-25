@@ -9,9 +9,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER= tenpo
-      - POSTGRES_PASSWORD= root
-      - POSTGRES_DB= tenpo_challenge
+      POSTGRES_USER: tenpo
+      POSTGRES_PASSWORD: tenpo
+      POSTGRES_DB: tenpo_challenge
 
   tenpo:
     image: 'tenpo:challenge'
@@ -25,7 +25,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/tenpo_challenge
       - SPRING_DATASOURCE_USERNAME=tenpo
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_DATASOURCE_PASSWORD=tenpo
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 

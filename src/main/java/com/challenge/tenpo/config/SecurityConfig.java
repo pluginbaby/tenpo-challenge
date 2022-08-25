@@ -50,8 +50,6 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authz) -> authz
-                        //.antMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .oauth2ResourceServer()

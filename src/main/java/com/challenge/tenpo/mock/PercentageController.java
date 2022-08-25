@@ -18,7 +18,6 @@ import java.util.concurrent.ThreadLocalRandom;
 @AllArgsConstructor
 public class PercentageController {
 
-    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @Operation(
             method = "Get",
