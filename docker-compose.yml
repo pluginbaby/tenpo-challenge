@@ -1,6 +1,18 @@
 version: '2'
 
 services:
+
+  postgres-tenpo:
+    image: postgres:13.1-alpine
+    container_name: db
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER= tenpo
+      - POSTGRES_PASSWORD= root
+      - POSTGRES_DB= tenpo_challenge
+
   tenpo:
     image: 'tenpo:challenge'
     build:
@@ -10,15 +22,11 @@ services:
     container_name: challenge
     depends_on:
       - postgres-tenpo
-
-
-  postgres-tenpo:
-    image: postgres:14.2
-    container_name: db
-    restart: always
-    ports:
-      - "5432:5432"
     environment:
-      - POSTGRES_USER= tenpo
-      - POSTGRES_PASSWORD= 1234
-      - POSTGRES_DB= tenpo_challenge
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/tenpo_challenge
+      - SPRING_DATASOURCE_USERNAME=tenpo
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+
+
