@@ -27,7 +27,6 @@ import java.util.List;
 public class HistoryEndpointsFilter extends OncePerRequestFilter {
 
     private HistoryEndpointService historyEndpointService;
-    private static final List<String> EXCLUDE_PATTERNS = new ArrayList();
 
     @Override
     protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response, final FilterChain filterChain) throws ServletException, IOException {
