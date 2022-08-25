@@ -20,13 +20,13 @@ public class PercentageClient {
 
     private final WebClient.Builder webClient;
 
-    @Value("${sum_client_base_url}")
+    @Value("${sum.client.base.url}")
     private String basePath;
-    @Value("${sum_client_sum_path}")
+    @Value("${sum.client.sum.path}")
     private String percentagePath;
-    @Value("${sum_client_max_retry}")
+    @Value("${sum.client.max.retry}")
     private Integer maxRetry;
-    @Value("${sum_client_duration_request}")
+    @Value("${sum.client.duration.request}")
     private Integer durationRequest;
 
 
